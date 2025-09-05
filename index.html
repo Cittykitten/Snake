@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snake — TikTok Speedrun Version</title>
-  <style>
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="wrap card">
-    <div class="hud">
-      <h1>Snake</h1>
-      <div class="badge">Score: <span id="score">0</span></div>
-      <button id="pause" class="btn" aria-label="Pause or resume">Pause</button>
+    <div class="game-container">
+        <h1>Snake Game</h1>
+        
+        <div class="score-container">
+            <div>Score: <span id="score">0</span></div>
+            <div>High Score: <span id="high-score">0</span></div>
+        </div>
+        
+        <canvas id="game-board" width="400" height="400"></canvas>
+        
+        <div id="game-over">Game Over! Press Start to play again.</div>
+        
+        <div class="buttons">
+            <button id="start-btn">Start Game</button>
+            <button id="pause-btn">Pause</button>
+        </div>
+        
+        <div class="controls">
+            <p>Use Arrow Keys or WASD to control the snake</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Play</h3>
+            <ul>
+                <li>Eat the red food to grow your snake and earn points</li>
+                <li>Don't hit the walls or your own tail</li>
+                <li>Press Pause to pause the game or Start to begin</li>
+            </ul>
+        </div>
     </div>
-    <canvas id="game" width="420" height="420" aria-label="Snake game canvas"></canvas>
-    <div class="tip">Controls: Arrow Keys or WASD. Space toggles pause. Eat the pink food. Avoid yourself.</div>
-  </div>
 
   <script src = "script.js"></script>
 </body>
