@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
+    <title>Snake Game - Three Files</title>
     <style>
         * {
             margin: 0;
@@ -13,37 +13,92 @@
         }
         
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             padding: 20px;
+            min-height: 100vh;
         }
         
-        .game-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
             padding: 20px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             text-align: center;
-            max-width: 500px;
-            width: 100%;
         }
         
         h1 {
-            color: #fff;
-            margin-bottom: 15px;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #34495e;
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        .tab.active {
+            background-color: #1abc9c;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            min-height: 400px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .code {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .game-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            margin-top: 20px;
         }
         
         .score-container {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
-            color: white;
             font-size: 1.2rem;
+            font-weight: bold;
         }
         
         #game-board {
@@ -57,7 +112,6 @@
         
         .controls {
             margin-top: 20px;
-            color: white;
         }
         
         .controls p {
@@ -78,37 +132,35 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            background-color: #4CAF50;
+            background-color: #3498db;
             color: white;
             font-weight: bold;
             transition: all 0.3s ease;
         }
         
         button:hover {
-            background-color: #45a049;
+            background-color: #2980b9;
             transform: translateY(-2px);
         }
         
         #game-over {
-            color: #ff5252;
+            color: #e74c3c;
             font-size: 2rem;
             font-weight: bold;
             margin-top: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             display: none;
         }
         
         .instructions {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #eaf2f8;
             border-radius: 10px;
             padding: 15px;
             margin-top: 20px;
-            color: #ddd;
         }
         
         .instructions h3 {
             margin-bottom: 10px;
-            color: #fff;
+            color: #2c3e50;
         }
         
         .instructions ul {
@@ -120,13 +172,37 @@
             margin-bottom: 5px;
         }
         
-        @media (max-width: 500px) {
-            .game-container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
+        .tag {
+            color: #ff79c6;
+        }
+        
+        .attr {
+            color: #50fa7b;
+        }
+        
+        .value {
+            color: #f1fa8c;
+        }
+        
+        .comment {
+            color: #6272a4;
+        }
+        
+        .selector {
+            color: #8be9fd;
+        }
+        
+        .property {
+            color: #50fa7b;
+        }
+        
+        .function {
+            color: #ffb86c;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
             }
             
             #game-board {
@@ -137,38 +213,227 @@
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Snake Game</h1>
+    <div class="container">
+        <header>
+            <h1>Snake Game</h1>
+            <p class="description">A classic Snake game implemented with HTML, CSS, and JavaScript in separate files</p>
+        </header>
         
-        <div class="score-container">
-            <div>Score: <span id="score">0</span></div>
-            <div>High Score: <span id="high-score">0</span></div>
+        <div class="tabs">
+            <div class="tab active" data-tab="html">index.html</div>
+            <div class="tab" data-tab="css">style.css</div>
+            <div class="tab" data-tab="js">script.js</div>
+            <div class="tab" data-tab="game">Play Game</div>
         </div>
         
-        <canvas id="game-board" width="400" height="400"></canvas>
-        
-        <div id="game-over">Game Over! Press Start to play again.</div>
-        
-        <div class="buttons">
-            <button id="start-btn">Start Game</button>
-            <button id="pause-btn">Pause</button>
+        <div class="tab-content active" id="html-content">
+            <h2>HTML Structure (index.html)</h2>
+            <div class="code">
+                <span class="comment">&lt;!DOCTYPE html&gt;</span><br>
+                <span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="value">"en"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;head&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="value">"UTF-8"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;meta</span> <span class="attr">name=</span><span class="value">"viewport"</span> <span class="attr">content=</span><span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;title&gt;</span>Snake Game<span class="tag">&lt;/title&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"style.css"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;/head&gt;</span><br>
+                <span class="tag">&lt;body&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"game-container"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span>Snake Game<span class="tag">&lt;/h1&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"score-container"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div&gt;</span>Score: <span class="tag">&lt;span</span> <span class="attr">id=</span><span class="value">"score"</span><span class="tag">&gt;</span>0<span class="tag">&lt;/span&gt;&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div&gt;</span>High Score: <span class="tag">&lt;span</span> <span class="attr">id=</span><span class="value">"high-score"</span><span class="tag">&gt;</span>0<span class="tag">&lt;/span&gt;&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;canvas</span> <span class="attr">id=</span><span class="value">"game-board"</span> <span class="attr">width=</span><span class="value">"400"</span> <span class="attr">height=</span><span class="value">"400"</span><span class="tag">&gt;&lt;/canvas&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">id=</span><span class="value">"game-over"</span><span class="tag">&gt;</span>Game Over! Press Start to play again.<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"buttons"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">id=</span><span class="value">"start-btn"</span><span class="tag">&gt;</span>Start Game<span class="tag">&lt;/button&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">id=</span><span class="value">"pause-btn"</span><span class="tag">&gt;</span>Pause<span class="tag">&lt;/button&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"controls"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Use Arrow Keys or WASD to control the snake<span class="tag">&lt;/p&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="value">"instructions"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3&gt;</span>How to Play<span class="tag">&lt;/h3&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ul&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Eat the red food to grow your snake and earn points<span class="tag">&lt;/li&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Don't hit the walls or your own tail<span class="tag">&lt;/li&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>Press Pause to pause the game or Start to begin<span class="tag">&lt;/li&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/ul&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;script</span> <span class="attr">src=</span><span class="value">"script.js"</span><span class="tag">&gt;&lt;/script&gt;</span><br>
+                <span class="tag">&lt;/body&gt;</span><br>
+                <span class="tag">&lt;/html&gt;</span>
+            </div>
         </div>
         
-        <div class="controls">
-            <p>Use Arrow Keys or WASD to control the snake</p>
+        <div class="tab-content" id="css-content">
+            <h2>CSS Styles (style.css)</h2>
+            <div class="code">
+                <span class="selector">*</span> {<br>
+                &nbsp;&nbsp;<span class="property">margin</span>: <span class="value">0</span>;<br>
+                &nbsp;&nbsp;<span class="property">padding</span>: <span class="value">0</span>;<br>
+                &nbsp;&nbsp;<span class="property">box-sizing</span>: <span class="value">border-box</span>;<br>
+                &nbsp;&nbsp;<span class="property">font-family</span>: <span class="value">'Segoe UI', Tahoma, Geneva, Verdana, sans-serif</span>;<br>
+                }<br><br>
+                
+                <span class="selector">body</span> {<br>
+                &nbsp;&nbsp;<span class="property">display</span>: <span class="value">flex</span>;<br>
+                &nbsp;&nbsp;<span class="property">justify-content</span>: <span class="value">center</span>;<br>
+                &nbsp;&nbsp;<span class="property">align-items</span>: <span class="value">center</span>;<br>
+                &nbsp;&nbsp;<span class="property">min-height</span>: <span class="value">100vh</span>;<br>
+                &nbsp;&nbsp;<span class="property">background</span>: <span class="value">linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)</span>;<br>
+                &nbsp;&nbsp;<span class="property">padding</span>: <span class="value">20px</span>;<br>
+                }<br><br>
+                
+                <span class="selector">.game-container</span> {<br>
+                &nbsp;&nbsp;<span class="property">background-color</span>: <span class="value">rgba(0, 0, 0, 0.8)</span>;<br>
+                &nbsp;&nbsp;<span class="property">border-radius</span>: <span class="value">15px</span>;<br>
+                &nbsp;&nbsp;<span class="property">padding</span>: <span class="value">20px</span>;<br>
+                &nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">0 0 30px rgba(0, 0, 0, 0.5)</span>;<br>
+                &nbsp;&nbsp;<span class="property">text-align</span>: <span class="value">center</span>;<br>
+                &nbsp;&nbsp;<span class="property">max-width</span>: <span class="value">500px</span>;<br>
+                &nbsp;&nbsp;<span class="property">width</span>: <span class="value">100%</span>;<br>
+                }<br><br>
+                
+                <span class="selector">h1</span> {<br>
+                &nbsp;&nbsp;<span class="property">color</span>: <span class="value">#fff</span>;<br>
+                &nbsp;&nbsp;<span class="property">margin-bottom</span>: <span class="value">15px</span>;<br>
+                &nbsp;&nbsp;<span class="property">font-size</span>: <span class="value">2.5rem</span>;<br>
+                &nbsp;&nbsp;<span class="property">text-shadow</span>: <span class="value">2px 2px 4px rgba(0, 0, 0, 0.5)</span>;<br>
+                }<br><br>
+                
+                <span class="selector">.score-container</span> {<br>
+                &nbsp;&nbsp;<span class="property">display</span>: <span class="value">flex</span>;<br>
+                &nbsp;&nbsp;<span class="property">justify-content</span>: <span class="value">space-between</span>;<br>
+                &nbsp;&nbsp;<span class="property">margin-bottom</span>: <span class="value">15px</span>;<br>
+                &nbsp;&nbsp;<span class="property">color</span>: <span class="value">white</span>;<br>
+                &nbsp;&nbsp;<span class="property">font-size</span>: <span class="value">1.2rem</span>;<br>
+                }<br><br>
+                
+                <span class="selector">#game-board</span> {<br>
+                &nbsp;&nbsp;<span class="property">border</span>: <span class="value">3px solid #333</span>;<br>
+                &nbsp;&nbsp;<span class="property">border-radius</span>: <span class="value">5px</span>;<br>
+                &nbsp;&nbsp;<span class="property">background-color</span>: <span class="value">#111</span>;<br>
+                &nbsp;&nbsp;<span class="property">display</span>: <span class="value">block</span>;<br>
+                &nbsp;&nbsp;<span class="property">margin</span>: <span class="value">0 auto</span>;<br>
+                &nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">0 0 20px rgba(0, 0, 0, 0.6)</span>;<br>
+                }<br><br>
+                
+                <span class="comment">/* Additional CSS rules would continue here */</span>
+            </div>
         </div>
         
-        <div class="instructions">
-            <h3>How to Play</h3>
-            <ul>
-                <li>Eat the red food to grow your snake and earn points</li>
-                <li>Don't hit the walls or your own tail</li>
-                <li>Press Pause to pause the game or Start to begin</li>
-            </ul>
+        <div class="tab-content" id="js-content">
+            <h2>JavaScript Code (script.js)</h2>
+            <div class="code">
+                <span class="comment">// Game variables</span><br>
+                <span class="keyword">const</span> canvas = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'game-board'</span>);<br>
+                <span class="keyword">const</span> ctx = canvas.<span class="function">getContext</span>(<span class="value">'2d'</span>);<br>
+                <span class="keyword">const</span> scoreElement = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'score'</span>);<br>
+                <span class="keyword">const</span> highScoreElement = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'high-score'</span>);<br>
+                <span class="keyword">const</span> startButton = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'start-btn'</span>);<br>
+                <span class="keyword">const</span> pauseButton = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'pause-btn'</span>);<br>
+                <span class="keyword">const</span> gameOverText = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="value">'game-over'</span>);<br><br>
+                
+                <span class="keyword">const</span> gridSize = <span class="value">20</span>;<br>
+                <span class="keyword">const</span> tileCount = canvas.<span class="property">width</span> / gridSize;<br><br>
+                
+                <span class="keyword">let</span> snake = [];<br>
+                <span class="keyword">let</span> food = {};<br>
+                <span class="keyword">let</span> dx = <span class="value">0</span>;<br>
+                <span class="keyword">let</span> dy = <span class="value">0</span>;<br>
+                <span class="keyword">let</span> score = <span class="value">0</span>;<br>
+                <span class="keyword">let</span> highScore = <span class="function">localStorage</span>.<span class="function">getItem</span>(<span class="value">'snakeHighScore'</span>) || <span class="value">0</span>;<br>
+                <span class="keyword">let</span> gameSpeed = <span class="value">9</span>;<br>
+                <span class="keyword">let</span> gameRunning = <span class="value">false</span>;<br>
+                <span class="keyword">let</span> gameLoop;<br><br>
+                
+                <span class="comment">// Initialize game</span><br>
+                <span class="keyword">function</span> <span class="function">initGame</span>() {<br>
+                &nbsp;&nbsp;snake = [<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="property">x</span>: <span class="value">10</span>, <span class="property">y</span>: <span class="value">10</span> }<br>
+                &nbsp;&nbsp;];<br>
+                &nbsp;&nbsp;<br>
+                &nbsp;&nbsp;<span class="function">generateFood</span>();<br>
+                &nbsp;&nbsp;<br>
+                &nbsp;&nbsp;score = <span class="value">0</span>;<br>
+                &nbsp;&nbsp;dx = <span class="value">0</span>;<br>
+                &nbsp;&nbsp;dy = <span class="value">0</span>;<br>
+                &nbsp;&nbsp;<br>
+                &nbsp;&nbsp;scoreElement.<span class="property">textContent</span> = score;<br>
+                &nbsp;&nbsp;gameOverText.<span class="property">style</span>.<span class="property">display</span> = <span class="value">'none'</span>;<br>
+                }<br><br>
+                
+                <span class="comment">// Generate food at random position</span><br>
+                <span class="keyword">function</span> <span class="function">generateFood</span>() {<br>
+                &nbsp;&nbsp;food = {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">x</span>: <span class="function">Math</span>.<span class="function">floor</span>(<span class="function">Math</span>.<span class="function">random</span>() * tileCount),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">y</span>: <span class="function">Math</span>.<span class="function">floor</span>(<span class="function">Math</span>.<span class="function">random</span>() * tileCount)<br>
+                &nbsp;&nbsp;};<br>
+                &nbsp;&nbsp;<br>
+                &nbsp;&nbsp;<span class="comment">// Make sure food doesn't appear on snake</span><br>
+                &nbsp;&nbsp;<span class="keyword">for</span> (<span class="keyword">let</span> part <span class="keyword">of</span> snake) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (part.<span class="property">x</span> === food.<span class="property">x</span> && part.<span class="property">y</span> === food.<span class="property">y</span>) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">generateFood</span>();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;}<br>
+                }<br><br>
+                
+                <span class="comment">// Additional JavaScript code would continue here</span>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="game-content">
+            <div class="game-container">
+                <h1>Snake Game</h1>
+                
+                <div class="score-container">
+                    <div>Score: <span id="score">0</span></div>
+                    <div>High Score: <span id="high-score">0</span></div>
+                </div>
+                
+                <canvas id="game-board" width="400" height="400"></canvas>
+                
+                <div id="game-over">Game Over! Press Start to play again.</div>
+                
+                <div class="buttons">
+                    <button id="start-btn">Start Game</button>
+                    <button id="pause-btn">Pause</button>
+                </div>
+                
+                <div class="controls">
+                    <p>Use Arrow Keys or WASD to control the snake</p>
+                </div>
+                
+                <div class="instructions">
+                    <h3>How to Play</h3>
+                    <ul>
+                        <li>Eat the red food to grow your snake and earn points</li>
+                        <li>Don't hit the walls or your own tail</li>
+                        <li>Press Pause to pause the game or Start to begin</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-content`).classList.add('active');
+            });
+        });
+
         // Game variables
         const canvas = document.getElementById('game-board');
         const ctx = canvas.getContext('2d');
