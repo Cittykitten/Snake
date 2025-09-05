@@ -1,4 +1,4 @@
-// Game variables
+  // Game variables
         const canvas = document.getElementById('game-board');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
